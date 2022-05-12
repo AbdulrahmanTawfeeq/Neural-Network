@@ -10,47 +10,23 @@
     <script src="js/Neuron.js"></script>
 
     <script>
-      data = [
+      let dataSet = [
         [[0, 0], 0],
-        [[1, 0], 1],
-        [[0, 1], 1],
+        [[0, 1], 0],
+        [[1, 0], 0],
         [[1, 1], 1],
       ];
-      let brain = new Neuron(2);
-      console.log([0, 0], brain.output([0, 0]));
-      console.log([1, 0], brain.output([1, 0]));
-      console.log([0, 1], brain.output([0, 1]));
-      console.log([1, 1], brain.output([1, 1]));
 
-      console.log(
-        "==========================BEFORE TRAINING========================="
-      );
+      let n = new Neuron(2);
+      // console.log("Guess without training: ", n.output([0, 1]));
 
-      for (let i = 0; i < 1000; i++) {
-        data.forEach((d) => {
-          brain.train(d[0], d[1]);
+      for (let i = 0; i < 10000; i++) {
+        dataSet.forEach((row) => {
+          n.train(row[0], row[1]);
+          // console.log(n.getError());
         });
       }
-
-      console.log(
-        "==========================AFTER TRAINING========================="
-      );
-
-      console.log([0, 0], brain.output([0, 0]));
-      console.log([1, 0], brain.output([1, 0]));
-      console.log([0, 1], brain.output([0, 1]));
-      console.log([1, 1], brain.output([1, 1]));
-
-      console.log(
-        "==========================TESTING SIMILAR DATA========================="
-      );
-
-      console.log([0.1, -1.1], Math.round(brain.output([0.1, -1.1])));
-      console.log([1.1, 0.9], Math.round(brain.output([1.1, 0.9])));
-
-      console.log("==========================Error=========================");
-
-      console.log(brain.getError());
+      console.log("Guess with training model: ", n.output([1.1, 0.9]));
     </script>
   </body>
 </html>
