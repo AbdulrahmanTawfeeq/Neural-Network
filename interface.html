@@ -8,25 +8,29 @@
   </head>
   <body>
     <script src="js/Neuron.js"></script>
+    <script src="js/Perceptron.js"></script>
+    <script src="js/NeuralNetwork.js"></script>
 
     <script>
-      let dataSet = [
-        [[0, 0], 0],
-        [[0, 1], 0],
-        [[1, 0], 0],
-        [[1, 1], 1],
-      ];
+      // let dataSet = [
+      //   [[0, 0], 0],
+      //   [[0, 1], 0],
+      //   [[1, 0], 0],
+      //   [[1, 1], 1],
+      // ];
 
-      let n = new Neuron(2);
-      // console.log("Guess without training: ", n.output([0, 1]));
+      // let n = new Neuron(2);
+      // // console.log("Guess without training: ", n.output([0, 1]));
 
-      for (let i = 0; i < 10000; i++) {
-        dataSet.forEach((row) => {
-          n.train(row[0], row[1]);
-          // console.log(n.getError());
-        });
-      }
-      console.log("Guess with training model: ", n.output([1.1, 0.9]));
+      // for (let i = 0; i < 10000; i++) {
+      //   dataSet.forEach((row) => {
+      //     n.train(row[0], row[1]);
+      //     // console.log(n.getError());
+      //   });
+      // }
+      // console.log("Guess with training model: ", n.output([1.1, 0.9]));
+
+      
     </script>
   </body>
 </html>
