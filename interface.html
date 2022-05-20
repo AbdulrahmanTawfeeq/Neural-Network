@@ -12,25 +12,70 @@
     <script src="js/NeuralNetwork.js"></script>
 
     <script>
+      // outlook	      temprature	humadity	windy	playgolf
+      /**
+       * sunny = 0      40 = 0.40   high = 2        no = 0
+       * rain = 1                   normal = 1      1 = 1
+       * overcast = 2
+       *
+       */
       // let dataSet = [
-      //   [[0, 0], 0],
-      //   [[0, 1], 0],
-      //   [[1, 0], 0],
-      //   [[1, 1], 1],
+      //   [[0, 0.45, 2, 0], [0]],
+      //   [[0, 0.43, 2, 1], [0]],
+      //   [[2, 0.41, 2, 0], [1]],
+      //   [[1, 0.36, 2, 0], [1]],
+      //   [[1, 0.18, 1, 0], [1]],
+      //   [[1, 0.17, 1, 1], [0]],
+      //   [[2, 0.20, 1, 1], [1]],
+      //   [[0, 0.33, 2, 0], [0]],
+      //   [[0, 0.16, 1, 0], [1]],
+      //   [[1, 0.32, 1, 0], [1]],
+      //   [[0, 0.23, 1, 1], [1]],
+      //   [[2, 0.24, 2, 1], [1]],
       // ];
 
-      // let n = new Neuron(2);
-      // // console.log("Guess without training: ", n.output([0, 1]));
+      // let dataSet = [
+      //   [[0, 0], [0]],
+      //   [[0, 1], [1]],
+      //   [[1, 0], [1]],
+      //   [[1, 1], [0]],
+      // ];
 
-      // for (let i = 0; i < 10000; i++) {
-      //   dataSet.forEach((row) => {
-      //     n.train(row[0], row[1]);
-      //     // console.log(n.getError());
-      //   });
+      // [[2, 0.40, 1, 0], [1]],
+      //   [[1, 0.32, 2, 1], [0]],
+
+      // async function jsonData(path) {
+      //   // using await instead of then() to let the Promise fetch() done then to assign to the const response
+      //   const response = await fetch(path);
+      //   if (response.status !== 200) {
+      //     throw new Error("Could not fetch the data!"); // in case of any problems with the url
+      //   }
+      //   // json() to convert the json into js object
+      //   const data = await response.json(); // we use await here as well as json() returns a promise too
+      //   return data;
       // }
-      // console.log("Guess with training model: ", n.output([1.1, 0.9]));
+
+      // let nn = new NeuralNetwork(784, 128, 10);
+      // jsonData("/data/data.json")
+      //   .then((dataSet) => {
+      //     console.log("SS");
+      //     dataSet.forEach(row => {
+      //       let label = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      //       label[row[0][0]] = 1;
+      //       let img = row[1].map((p)=>p/255);
+      //       nn.train(img, label);
+      //       console.log(label);
+      //     }); 
+      //     console.log(nn.getTotalError());
+      //   })
+      //   .catch((err) => console.log(err.message));
 
       
+      // console.log("Before Training: 0 xor 0 =>", nn.predict([0, 0]));
+
+      // nn.train(row[1], label);
+
+      // console.log("After Training: 0 xor 0 =>", nn.predict([0, 0]));
     </script>
   </body>
 </html>
