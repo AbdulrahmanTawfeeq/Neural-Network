@@ -4,78 +4,90 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/interface.css" />
     <title>Neural Network</title>
   </head>
   <body>
+    <main>
+      <header><h1>Playing Golf Prediction</h1></header>
+      <div class="content">
+        <label for="temprature">Temprature</label>
+        <select name="" id="temprature">
+          <option value="0">Cool</option>
+          <option value="1">Mild</option>
+          <option value="2">Hot</option>
+        </select>
+
+        <label for="outlook">Outlook</label
+        ><select name="" id="outlook">
+          <option value="0">Sunny</option>
+          <option value="1">rain</option>
+          <option value="2">overcast</option>
+        </select>
+
+        <label for="humadity">Humadity</label
+        ><select name="" id="humadity">
+          <option value="1">Normal</option>
+          <option value="2">High</option>
+        </select>
+
+        <label for="">Windy</label
+        ><select name="" id="windy">
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+        </select>
+      </div>
+      <footer>
+        <button onclick="getInfo()" id="predict">Predict</button>
+      </footer>
+      <label id="result"></label>
+    </main>
+
     <script src="js/Neuron.js"></script>
     <script src="js/Perceptron.js"></script>
     <script src="js/NeuralNetwork.js"></script>
-
+    <script src="js/interface.js"></script>
     <script>
-      // outlook	      temprature	humadity	windy	playgolf
-      /**
-       * sunny = 0      40 = 0.40   high = 2        no = 0
-       * rain = 1                   normal = 1      1 = 1
-       * overcast = 2
-       *
-       */
-      // let dataSet = [
-      //   [[0, 0.45, 2, 0], [0]],
-      //   [[0, 0.43, 2, 1], [0]],
-      //   [[2, 0.41, 2, 0], [1]],
-      //   [[1, 0.36, 2, 0], [1]],
-      //   [[1, 0.18, 1, 0], [1]],
-      //   [[1, 0.17, 1, 1], [0]],
-      //   [[2, 0.20, 1, 1], [1]],
-      //   [[0, 0.33, 2, 0], [0]],
-      //   [[0, 0.16, 1, 0], [1]],
-      //   [[1, 0.32, 1, 0], [1]],
-      //   [[0, 0.23, 1, 1], [1]],
-      //   [[2, 0.24, 2, 1], [1]],
-      // ];
+      // Outlook			Temperature			Humidity			Windy
+      // sunny	0		  cool	0		      normal	1	  	0
+      // overcast	1		mild	1		      high	2		    1
+      // rainy	2		  hot	2
 
-      // let dataSet = [
-      //   [[0, 0], [0]],
-      //   [[0, 1], [1]],
-      //   [[1, 0], [1]],
-      //   [[1, 1], [0]],
-      // ];
+      let dataSet = [
+        [[0, 2, 2, 0], [0]],
+        [[0, 2, 2, 1], [0]],
+        [[1, 2, 2, 0], [1]],
+        [[2, 1, 2, 0], [1]],
+        [[2, 0, 1, 0], [1]],
+        [[2, 0, 1, 1], [0]],
+        [[1, 0, 1, 1], [1]],
+        [[0, 1, 2, 0], [0]],
+        [[0, 0, 1, 0], [1]],
+        [[2, 1, 1, 0], [1]],
+        [[0, 1, 1, 1], [1]],
+        [[1, 1, 2, 1], [1]],
+        [[1, 2, 1, 0], [1]],
+        [[2, 1, 2, 1], [0]],
+      ];
 
-      // [[2, 0.40, 1, 0], [1]],
-      //   [[1, 0.32, 2, 1], [0]],
+      // [[0, 1, 1, 1], [1]],
+      //   [[2, 1, 2, 1], [0]],
 
-      // async function jsonData(path) {
-      //   // using await instead of then() to let the Promise fetch() done then to assign to the const response
-      //   const response = await fetch(path);
-      //   if (response.status !== 200) {
-      //     throw new Error("Could not fetch the data!"); // in case of any problems with the url
-      //   }
-      //   // json() to convert the json into js object
-      //   const data = await response.json(); // we use await here as well as json() returns a promise too
-      //   return data;
-      // }
+      let nn = new NeuralNetwork(4, 2, 1);
+      let output = nn.predict([0, 2, 2, 0]);
+      console.log("Before Training: ", output[0]);
 
-      // let nn = new NeuralNetwork(784, 128, 10);
-      // jsonData("/data/data.json")
-      //   .then((dataSet) => {
-      //     console.log("SS");
-      //     dataSet.forEach(row => {
-      //       let label = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-      //       label[row[0][0]] = 1;
-      //       let img = row[1].map((p)=>p/255);
-      //       nn.train(img, label);
-      //       console.log(label);
-      //     }); 
-      //     console.log(nn.getTotalError());
-      //   })
-      //   .catch((err) => console.log(err.message));
+      for (let i = 0; i < 2000; i++) {
+        dataSet.forEach((row) => {
+          nn.train(row[0], row[1]);
+        });
+        console.log("Error Before Training: ", nn.getTotalError());
+        if (i == 0) {
+          console.log("Error Before Training: ", nn.getTotalError());
+        }
+      }
 
-      
-      // console.log("Before Training: 0 xor 0 =>", nn.predict([0, 0]));
-
-      // nn.train(row[1], label);
-
-      // console.log("After Training: 0 xor 0 =>", nn.predict([0, 0]));
+      console.log("Error After Training: ", nn.getTotalError());
     </script>
   </body>
 </html>
