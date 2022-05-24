@@ -9,85 +9,34 @@
   </head>
   <body>
     <main>
-      <header><h1>Playing Golf Prediction</h1></header>
+      <header><h1>Iris Flower Type Prediction</h1></header>
       <div class="content">
-        <label for="temprature">Temprature</label>
-        <select name="" id="temprature">
-          <option value="0">Cool</option>
-          <option value="1">Mild</option>
-          <option value="2">Hot</option>
-        </select>
+        <!-- sepal.length	    sepal.width	    petal.length    petal.width -->
+        <label for="sepalLength">Sepal Length</label>
+        <input type="number" id="sepalLength" />
 
-        <label for="outlook">Outlook</label
-        ><select name="" id="outlook">
-          <option value="0">Sunny</option>
-          <option value="1">rain</option>
-          <option value="2">overcast</option>
-        </select>
+        <label for="sepalWidth">Sepal Width</label
+        ><input type="number" id="sepalWidth" />
 
-        <label for="humadity">Humadity</label
-        ><select name="" id="humadity">
-          <option value="1">Normal</option>
-          <option value="2">High</option>
-        </select>
+        <label for="petalLength">Petal Length</label
+        ><input type="number" id="petalLength" />
 
-        <label for="">Windy</label
-        ><select name="" id="windy">
-          <option value="1">Yes</option>
-          <option value="0">No</option>
-        </select>
+        <label for="petalWidth">Petal Width</label
+        ><input type="number" id="petalWidth" />
       </div>
       <footer>
         <button onclick="getInfo()" id="predict">Predict</button>
       </footer>
-      <label id="result"></label>
+      <label id="result" for="img">Flower Type: </label>
+      <div>
+        <img src="" alt="">
+      </div>
     </main>
 
+    <script src="data/data.js"></script>
     <script src="js/Neuron.js"></script>
     <script src="js/Perceptron.js"></script>
     <script src="js/NeuralNetwork.js"></script>
     <script src="js/interface.js"></script>
-    <script>
-      // Outlook			Temperature			Humidity			Windy
-      // sunny	0		  cool	0		      normal	1	  	0
-      // overcast	1		mild	1		      high	2		    1
-      // rainy	2		  hot	2
-
-      let dataSet = [
-        [[0, 2, 2, 0], [0]],
-        [[0, 2, 2, 1], [0]],
-        [[1, 2, 2, 0], [1]],
-        [[2, 1, 2, 0], [1]],
-        [[2, 0, 1, 0], [1]],
-        [[2, 0, 1, 1], [0]],
-        [[1, 0, 1, 1], [1]],
-        [[0, 1, 2, 0], [0]],
-        [[0, 0, 1, 0], [1]],
-        [[2, 1, 1, 0], [1]],
-        [[0, 1, 1, 1], [1]],
-        [[1, 1, 2, 1], [1]],
-        [[1, 2, 1, 0], [1]],
-        [[2, 1, 2, 1], [0]],
-      ];
-
-      // [[0, 1, 1, 1], [1]],
-      //   [[2, 1, 2, 1], [0]],
-
-      let nn = new NeuralNetwork(4, 2, 1);
-      let output = nn.predict([0, 2, 2, 0]);
-      console.log("Before Training: ", output[0]);
-
-      for (let i = 0; i < 2000; i++) {
-        dataSet.forEach((row) => {
-          nn.train(row[0], row[1]);
-        });
-        console.log("Error Before Training: ", nn.getTotalError());
-        if (i == 0) {
-          console.log("Error Before Training: ", nn.getTotalError());
-        }
-      }
-
-      console.log("Error After Training: ", nn.getTotalError());
-    </script>
   </body>
 </html>

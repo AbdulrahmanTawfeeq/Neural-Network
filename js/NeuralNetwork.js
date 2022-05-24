@@ -1,7 +1,7 @@
 class NeuralNetwork {
-  static learningRate = 0.5;
+  static learningRate = 0.1;
   #errors; // private
-  constructor(inputs, hiddenNodes, outputNodes) {
+  constructor(inputs, hiddenNodes, outputNodes, model = [[],[]]) {
     // how many inputs, just a number
     this.inputs = inputs;
     this.inputLayer = [];
@@ -14,7 +14,7 @@ class NeuralNetwork {
      * weights and bias w will be set according to no. of inputs
      */
     for (let i = 0; i < this.hiddenLayer.length; i++) {
-      this.hiddenLayer[i] = new Perceptron(this.inputs);
+      this.hiddenLayer[i] = new Perceptron(this.inputs, model[0][i]);
     }
 
     /**
@@ -22,7 +22,10 @@ class NeuralNetwork {
      * weights and bias w will be set according to no. of hidden layer Perceptrons
      */
     for (let i = 0; i < this.outputLayer.length; i++) {
-      this.outputLayer[i] = new Perceptron(this.hiddenLayer.length);
+      this.outputLayer[i] = new Perceptron(
+        this.hiddenLayer.length,
+        model[1][i]
+      );
     }
   }
 
@@ -139,5 +142,17 @@ class NeuralNetwork {
 
   getTotalError() {
     return this.getErrors().reduce((acc, curr) => acc + curr);
+  }
+
+  getModel() {
+    let model = [[], []];
+    this.hiddenLayer.forEach((p) => {
+      model[0].push(p.getWeights());
+    });
+
+    this.outputLayer.forEach((p) => {
+      model[1].push(p.getWeights());
+    });
+    return model;
   }
 }

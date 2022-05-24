@@ -49,3 +49,7 @@ footer{
 .no{
     color: red;
 }
+
+main>:last-child{
+    /* background-color: red; */
+}
