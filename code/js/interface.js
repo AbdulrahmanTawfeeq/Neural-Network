@@ -25,21 +25,21 @@ model = [[
   [-7.8878370919152525, 11.851427463903018, -0.29716321559484354, 0.9713266617913632, -0.5255253344784154]
 ]];
 
-let nn = new NeuralNetwork(4, 4, 3, model);
+let nn = new NeuralNetwork(4, 4, 3);
 let output = nn.predict([5.8, 4, 1.2, 0.2]);
 console.log("Before Training: ", output);
 
-// let label;
-// for (let i = 0; i < 1000; i++) {
-//   trainSet.forEach((row) => {
-//     label = [0, 0, 0];
-//     label[row[1]] = 1;
-//     nn.train(row[0], label);
-//   });
-//   console.log("Error Before Training: ", nn.getTotalError());
-//   if (i == 0) {
-//     console.log("Error Before Training: ", nn.getTotalError());
-//   }
-// }
+let label;
+for (let i = 0; i < 10000; i++) {
+  trainSet.forEach((row) => {
+    label = [0, 0, 0];
+    label[row[1]] = 1; [0, 0, 1];
+    nn.train(row[0], label);
+  });
+  console.log("Error Before Training: ", nn.getTotalError());
+  if (i == 0) {
+    console.log("Error Before Training: ", nn.getTotalError());
+  }
+}
 
-// console.log("Error After Training: ", nn.getTotalError());
+console.log("Error After Training: ", nn.getTotalError());
